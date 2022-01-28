@@ -3,6 +3,7 @@ const bc = require('bcryptjs')
 const Users = require('../users/users-model')
 const { HASH_ROUNDS } = require('../../config/index')
 const { checkUsernameUnique, checkPayload } = require('../middleware/users-middleware.js')
+const { makeToken } = require('./auth-token-maker')
 
 router.post('/register',checkUsernameUnique,checkPayload, async (req, res, next) => {
   try {
@@ -45,7 +46,17 @@ router.post('/register',checkUsernameUnique,checkPayload, async (req, res, next)
       */
 
 router.post('/login', (req, res) => {
-  res.end('implement login, please!');
+  let { username, password } = req.body
+
+  Users.findByUsername(username)
+    .then(user => {
+      if (user && bc.compareSync(password, user.password)) {
+        const token = makeToken(user)
+        res.status(200).json({ message: `Welcome, ${user.username}`, token})
+      } else {
+        res.status(401).json({ message: "invalid credentials"})
+      }
+    })
 });
   /*
     IMPLEMENT
