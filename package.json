@@ -6,6 +6,7 @@
     "start": "node index.js",
     "server": "nodemon index.js",
     "migrate": "knex migrate:latest",
+    "rollback": "knex migrate:rollback",
     "test": "cross-env NODE_ENV=testing jest --verbose --runInBand --silent"
   },
   "repository": {
@@ -25,11 +26,11 @@
     "sqlite3": "5.0.2"
   },
   "devDependencies": {
-    "@types/jest": "27.0.3",
+    "@types/jest": "^27.0.3",
     "cross-env": "7.0.3",
     "eslint": "8.4.1",
     "jest": "27.4.4",
     "nodemon": "2.0.15",
-    "supertest": "6.1.6"
+    "supertest": "^6.1.6"
   }
 }

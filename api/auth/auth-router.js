@@ -81,5 +81,7 @@ router.post('/login', (req, res) => {
     4- On FAILED login due to `username` not existing in the db, or `password` being incorrect,
       the response body should include a string exactly as follows: "invalid credentials".
   */
-
+router.get('/test', async (req, res) => {
+  res.json({ message: 'pass!' })
+})
 module.exports = router;
