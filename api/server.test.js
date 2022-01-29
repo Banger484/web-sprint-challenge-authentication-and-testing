@@ -2,7 +2,6 @@
 const db = require('../data/dbConfig')
 const request = require('supertest')
 const server = require('./server')
-const Users = require('./users/users-model')
 
 beforeAll(async () => {
   await db.migrate.rollback()
@@ -12,9 +11,11 @@ beforeAll(async () => {
 test('sanity', () => {
   expect(true).not.toBe(false)
 })
+
+// I really struggled with testing this unit, I don't have time left to finish up all of my testing. :(
+
 // Jokes Endpoint Tests
 
-// can't figure out how to get auth to this endpoint in the test... :(
 
 test('get /jokes', async () => {
   const res = await request(server).get('/api/jokes')
